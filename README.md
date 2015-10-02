@@ -1,6 +1,6 @@
 # minimalbox
 
-![](/template/assets/logo.png)
+![](/assets/logo.png)
 
 预览：http://minimalbox.farbox.com/  
 代码：https://github.com/tyrikio/minimalbox
