@@ -1,0 +1,48 @@
+#fb_comments_container
+	if site.configs.disqus
+		#disqus_thread
+		script(type="text/javascript")
+			var disqus_shortname = '{{ site.configs.disqus }}';
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+	elif site.configs.duoshuo
+		.ds-thread
+		script(type="text/javascript")
+			var duoshuoQuery = {short_name:"{{ site.configs.duoshuo }}"};
+			(function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true;
+			ds.src = '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+	else
+		if not site.configs.scripts_for_doc and not site.comment_script and is_comment_allowed(context_doc)
+			link(rel="stylesheet", href="/template/assets/comment.css")
+			form#fb_new_comment(method="post", action="#fb_new_comment")
+
+				.input_body
+					if not request.is_login
+							input.cmt-text(type="text", name="author", title="昵称", placeholder="小明", value=raw_comment.author)
+							input.cmt-text(type="text", name="email", placeholder="@gmail.com", value=raw_comment.email)
+							input.cmt-text(type="text", name="site", placeholder="http://", value=raw_comment.site)
+							textarea#cmt-textarea(name="content", rows="5", placeholder="在这里评论哟～")= raw_comment.content
+					if raw_comment.error
+						span.comment_error= raw_comment.error
+					span
+						input#c_submit(type="submit", value="评论", class="c_button")
+			ul#fb_comments
+				for comment in comments
+					.comment
+						.avatar.hovercard
+								img(src="http://gravatar.duoshuo.com/avatar/{{ comment.email_md5 }}")
+						.comment-body
+							a.author.nostyle-link(href="{{comment.site or '#'}}", target="_blank")
+								 =comment.author or '老王'
+							p= comment.content
+							span.date= comment.date.format("%b %d, %y")
+
+		elif site.comment_script
+			|{{ site.comment_script }}
+		else
+			//scripts_for_doc

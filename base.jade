@@ -1,0 +1,36 @@
+html
+	head
+		+mobile_meta()
+		block title
+			title= request.args.s or post.title or tags.join('+') or category.title or site.title
+		meta(name="keywords", content=site.configs.keywords.escaped)
+		meta(name="description", content=site.raw_content.escaped)
+		link(rel="shortcut icon", href="/template/assets/favicon.ico", type="image/x-icon")
+		+load("/template/assets/style.scss")
+	body
+		header
+			.container
+				.logo-wrapper.fixed.J-logo-wrapper
+					a.logo.nostyle-link(href='/')
+				{% if post.metadata['status'] == 'public' %}
+				h1.site-title(style="display: none;")
+					a.nostyle-link(href='/')= site.title
+				{% else %}
+				h1.site-title
+					a.nostyle-link(href='/')= site.title
+				{% endif %}
+
+		.container
+			block content
+
+		footer
+			.container
+				nav.cf
+						a.nav-link.nostyle-link(href='/archive') 文章存档
+						if has('about.md')
+							a.nav-link.nostyle-link(href='/about') 关于
+
+				p.footnote
+					| Theme designed by Wang Chenlu. Powered by farbox
+			+load("//use.typekit.net/tjf8bod.js")
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>

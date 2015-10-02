@@ -1,0 +1,32 @@
+html
+	head
+		meta(name="viewport", content="width=device-width")
+		title Error
+		style(type="text/css")
+			@import "lesshat";
+			html { 
+			background:  url(/template/assets/image/error.gif) no-repeat center center fixed; 
+			background-size: cover;
+			}
+			h1{
+			font-size: 16em;
+			margin: .2em .5em;
+			color: rgba(255,255,255, 0.7);
+			margin-bottom:0px;
+			}
+			h2{
+			font-size: 1.7em;
+			margin: .2em .5em;
+			color: rgba(255,255,255, 0.6);
+			}
+			div.error{
+			position:absolute;
+			top:30%;
+			margin-top:-8em;
+			width:100%;
+			text-align:center;
+			}
+	body
+		.error
+			h1 404
+			h2 Oh Shit! Page not found =X

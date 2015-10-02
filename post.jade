@@ -1,0 +1,13 @@
+extends base
+block title
+	title= post.title + " - " + site.title
+block content
+
+	.post.pg-post
+		h1.title= post.title
+		{% if post.metadata['type'] != 'page'%}
+		p.date= post.date.format('%B %d, %Y')
+		{% endif %}
+		.post-content= post.content
+		
+		include include/comments

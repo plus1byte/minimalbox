@@ -1,0 +1,24 @@
+extends base
+
+block content
+	if request.path.strip('/')=='tags'
+		entries = get_data(type='post',limit=300, sort='desc').group('tags')
+	else
+		entries = get_data(type='post',limit=300, sort='desc').group('-date:year')
+
+	ul.archive-list
+		li
+			for sub_title, posts in entries
+				p.year= sub_title
+					for post in posts
+						.post-set
+							span.date= post.date.format("%b, %d")
+							.post-link
+								a.nostyle-link(href=post.url, title=post.title)= post.title
+								{% if post.metadata.has_key('refer_url')%}
+								span.source
+									a(href="{{ post.metadata['refer_url'] }}", class="nostyle-link")
+								 		→ 
+								{% endif %}
+
+	include include/paginator.jade

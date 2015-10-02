@@ -1,0 +1,6 @@
+if paginator.has_pre or paginator.has_next
+	.pager.cf
+		if paginator.has_pre
+			a.pre.nostyle-link(href=paginator.pre_url) 新篇
+		if paginator.has_next
+			a.next.nostyle-link(href=paginator.next_url) 旧文
