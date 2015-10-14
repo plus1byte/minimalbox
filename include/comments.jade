@@ -27,6 +27,8 @@
 							input.cmt-text(type="text", name="email", placeholder="@gmail.com", value=raw_comment.email)
 							input.cmt-text(type="text", name="site", placeholder="http://", value=raw_comment.site)
 							textarea#cmt-textarea(name="content", rows="5", placeholder="在这里评论哟～")= raw_comment.content
+					else request.is_login
+							textarea#cmt-textarea(name="content", rows="5", placeholder="在这里评论哟～")= raw_comment.content
 					if raw_comment.error
 						span.comment_error= raw_comment.error
 					span
