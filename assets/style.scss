@@ -274,6 +274,9 @@ strong, em, b {
   .toc {
     right: 0
   }
+  .comment-body a, .comment-body p {
+	padding-left: .5em;
+  }
 }
 @media screen and (max-width:660px) {
   body {
